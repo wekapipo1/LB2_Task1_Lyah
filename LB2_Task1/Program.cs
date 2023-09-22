@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 public class Numbers
 {
@@ -53,35 +53,49 @@ class Program
     static void Main(string[] args)
     {
         int a, b;
-        try
+        bool repeat = true;
+        while (repeat) 
         {
-            //Просимо користувача ввести два натуральних числа
-            Console.WriteLine("Введiть два натуральних числа");
-            Console.Write("a = "); a = Convert.ToInt32(Console.ReadLine());
-            Console.Write("b = "); b = Convert.ToInt32(Console.ReadLine());
-            //створення об'єкту з 0 полями
-            Numbers n = new Numbers();
-            //привласнення значень полям за допомогою властивостей
-            n.A = a; n.B = b;
-            //вивод на екран значень полів
-            n.Print();
-            //перевірка існування об'єкта
-            if (n.Correct()) //об'єкт існує
+            try
             {
-                //Застосування методів
-                int nsd = n.Nod();
-                int nsk = n.Nok();
-                //виводимо результат
-                Console.WriteLine($"НСД = {nsd} НСК = {nsk}");
+                //Просимо користувача ввести два натуральних числа
+                Console.WriteLine("\n\nВведiть два натуральних числа");
+                Console.Write("a = "); a = Convert.ToInt32(Console.ReadLine());
+                Console.Write("b = "); b = Convert.ToInt32(Console.ReadLine());
+                //створення об'єкту з 0 полями
+                Numbers n = new Numbers();
+                //привласнення значень полям за допомогою властивостей
+                n.A = a; n.B = b;
+                //вивод на екран значень полів
+                n.Print();
+                //перевірка існування об'єкта
+                if (n.Correct()) //об'єкт існує
+                {
+                    //Застосування методів
+                    int nsd = n.Nod();
+                    int nsk = n.Nok();
+                    //виводимо результат
+                    Console.WriteLine($"НСД = {nsd} НСК = {nsk}");
+                }
+                //об'єкт не існує
+                else Console.WriteLine("Вiд'ємнi числа не можуть бути використанi");
+                Console.Write("Спробувати знову? (Y/N): ");
+                ConsoleKeyInfo yesno = Console.ReadKey();
+
+                if (yesno.Key == ConsoleKey.N)
+                {
+                    break;                    
+                }
+                else if (yesno.Key != ConsoleKey.Y)
+                {
+                    Console.WriteLine("\nНевiрне введення. Натиснiть Y або N.");
+                }
             }
-            //об'єкт не існує
-            else Console.WriteLine("Числа не є натуральними");
-        }
-        catch
-        {
-            //інші можливі виключення
-            Console.WriteLine("Помилка!!! Введiть натуральне число");
-        }
-        Console.ReadKey();
+            catch
+            {
+                //інші можливі виключення
+                Console.WriteLine("Помилка!!! Введiть натуральне число");
+            } 
+        }        
     }
 }
